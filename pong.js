@@ -139,9 +139,6 @@ var Game = {
 				if (this.ball.y >= 200 && this.ball.y <= 800) this.ball.moveX = DIRECTION.LEFT;
 			}
 
-
-
-
 			// Move player if they player.move value was updated by a keyboard event
 			if (this.player.move === DIRECTION.UP) this.player.y -= this.player.speed;
 			else if (this.player.move === DIRECTION.DOWN) this.player.y += this.player.speed;
@@ -150,7 +147,7 @@ var Game = {
 			// and randomize the direction to add some challenge.
 			if (Pong._turnDelayIsOver.call(this) && this.turn) {
 				// this.ball.moveX = this.turn === this.player ? DIRECTION.LEFT : DIRECTION.RIGHT;
-				this.ball.x=this.canvas.width -100;
+				this.ball.x = this.canvas.width - 100;
 				this.ball.moveY = [DIRECTION.UP, DIRECTION.DOWN][Math.round(Math.random())];
 				this.ball.y = Math.floor(Math.random() * this.canvas.height - 200) + 200;
 				this.turn = null;
@@ -166,39 +163,14 @@ var Game = {
 			if (this.ball.moveX === DIRECTION.LEFT) this.ball.x -= this.ball.speed;
 			else if (this.ball.moveX === DIRECTION.RIGHT) this.ball.x += this.ball.speed;
 
-			// // Handle paddle (AI) UP and DOWN movement
-			// if (this.paddle.y > this.ball.y - (this.paddle.height / 2)) {
-			// 	if (this.ball.moveX === DIRECTION.RIGHT) this.paddle.y -= this.paddle.speed / 1.5;
-			// 	else this.paddle.y -= this.paddle.speed / 4;
-			// }
-			// if (this.paddle.y < this.ball.y - (this.paddle.height / 2)) {
-			// 	if (this.ball.moveX === DIRECTION.RIGHT) this.paddle.y += this.paddle.speed / 1.5;
-			// 	else this.paddle.y += this.paddle.speed / 4;
-			// }
-
-			// // Handle paddle (AI) wall collision
-			// if (this.paddle.y >= this.canvas.height - this.paddle.height) this.paddle.y = this.canvas.height - this.paddle.height;
-			// else if (this.paddle.y <= 0) this.paddle.y = 0;
 
 			// Handle Player-Ball collisions
 			if (this.ball.x - this.ball.width <= this.player.x && this.ball.x >= this.player.x - this.player.width) {
 				if (this.ball.y <= this.player.y + this.player.height && this.ball.y + this.ball.height >= this.player.y) {
 					this.ball.x = (this.player.x + this.ball.width);
 					this.ball.moveX = DIRECTION.RIGHT;
-
-					// beep1.play();
 				}
 			}
-
-			// // Handle paddle-ball collision
-			// if (this.ball.x - this.ball.width <= this.paddle.x && this.ball.x >= this.paddle.x - this.paddle.width) {
-			// 	if (this.ball.y <= this.paddle.y + this.paddle.height && this.ball.y + this.ball.height >= this.paddle.y) {
-			// 		this.ball.x = (this.paddle.x - this.ball.width);
-			// 		this.ball.moveX = DIRECTION.LEFT;
-
-			// 		// beep1.play();
-			// 	}
-			// }
 		}
 
 		// Handle the end of round transition
@@ -217,8 +189,6 @@ var Game = {
 				// this.paddle.speed += 1;
 				this.ball.speed += 1;
 				this.round += 1;
-
-				// beep3.play();
 			}
 		}
 		// Check to see if the paddle/AI has won the round.
@@ -260,14 +230,6 @@ var Game = {
 			this.player.height
 		);
 
-		// // Draw the Paddle
-		// this.context.fillRect(
-		// 	this.paddle.x,
-		// 	this.paddle.y,
-		// 	this.paddle.width,
-		// 	this.paddle.height
-		// );
-
 		// Draw the Ball
 		if (Pong._turnDelayIsOver.call(this)) {
 			this.context.fillStyle = '#ffd700';
@@ -305,7 +267,7 @@ var Game = {
 			(this.canvas.width / 2) + 300,
 			120,
 		);
-		
+
 		// Draw the players score (left)
 		this.context.font = '100px Courier New';
 		this.context.fillText(
@@ -330,16 +292,6 @@ var Game = {
 			(this.canvas.width / 2),
 			35
 		);
-
-		// Change the font size for the center score value
-		// this.context.font = '40px Courier';
-
-		// // Draw the current round number
-		// this.context.fillText(
-		// 	rounds[Pong.round] ? rounds[Pong.round] : rounds[Pong.round - 1],
-		// 	(this.canvas.width / 2),
-		// 	100
-		// );
 	},
 
 	loop: function () {
@@ -385,8 +337,6 @@ var Game = {
 		this.timer = (new Date()).getTime();
 		if (point == 0) { player.lifes-- }
 		else { player.score += point; }
-
-
 	},
 
 	// Wait for a delay to have passed after each turn.
@@ -404,16 +354,3 @@ var Game = {
 
 var Pong = Object.assign({}, Game);
 Pong.initialize();
-
-
-
-
-
-
-
-
-
-
-
-
-
